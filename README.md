@@ -34,9 +34,11 @@ npm install three @types/three @react-three/fiber @react-three/drei
 npm run dev
 ```
 
-3. Open a second terminal to install and explicitly start API backend:
+3. Open a second terminal to install explicit backend web scraping & API tools:
 ```bash
 pip install -r requirements.txt
+# Ensure you have installed parsing libraries:
+pip install beautifulsoup4 lxml requests fastapi uvicorn pydantic
 python main.py
 ```
 
