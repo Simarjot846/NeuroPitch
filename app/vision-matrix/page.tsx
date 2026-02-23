@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 
-const ThreeHeatmap = dynamic(() => import("@/components/ThreeHeatmap"), { ssr: false });
+const ThreePitchHeatmap = dynamic(() => import("@/components/ThreePitchHeatmap"), { ssr: false });
 
 const suggestions = [
     { id: 1, label: "Move Deep Square Leg wider", risk: "Low", conf: "94%" },
@@ -29,7 +29,7 @@ export default function VisionMatrix() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <TacticalCard title="Fielding Heatmap" icon={<Map size={20} />} className="h-[450px]">
                     <div className="w-full h-full p-2 relative">
-                        <ThreeHeatmap activeSuggestion={activeSuggestion} />
+                        <ThreePitchHeatmap activeSuggestion={activeSuggestion} />
                     </div>
                 </TacticalCard>
 
@@ -41,8 +41,8 @@ export default function VisionMatrix() {
                                     key={item.id}
                                     onClick={() => setActiveSuggestion(activeSuggestion === item.id ? null : item.id)}
                                     className={`flex justify-between items-center p-3 rounded-lg border transition-colors cursor-pointer group ${activeSuggestion === item.id
-                                            ? "border-neonCyan bg-neonCyan/10"
-                                            : "bg-white/5 border-white/5 hover:border-neonCyan hover:bg-neonCyan/5"
+                                        ? "border-neonCyan bg-neonCyan/10"
+                                        : "bg-white/5 border-white/5 hover:border-neonCyan hover:bg-neonCyan/5"
                                         }`}
                                 >
                                     <span className={`transition-colors ${activeSuggestion === item.id ? "text-white" : "text-gray-300 group-hover:text-white"}`}>
