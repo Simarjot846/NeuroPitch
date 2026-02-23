@@ -4,10 +4,19 @@ import TacticalCard from "@/components/TacticalCard";
 import { Eye, Map, Navigation, LocateFixed } from "lucide-react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import { useState } from "react";
 
-const ThreePitch = dynamic(() => import("@/components/ThreePitch"), { ssr: false });
+const ThreeHeatmap = dynamic(() => import("@/components/ThreeHeatmap"), { ssr: false });
+
+const suggestions = [
+    { id: 1, label: "Move Deep Square Leg wider", risk: "Low", conf: "94%" },
+    { id: 2, label: "Bring Long On inside circle", risk: "High", conf: "78%" },
+    { id: 3, label: "Deploy Fly Slip", risk: "Med", conf: "82%" },
+];
 
 export default function VisionMatrix() {
+    const [activeSuggestion, setActiveSuggestion] = useState<number | null>(null);
+
     return (
         <div className="space-y-8">
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
@@ -20,22 +29,29 @@ export default function VisionMatrix() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <TacticalCard title="Fielding Heatmap" icon={<Map size={20} />} className="h-[450px]">
                     <div className="w-full h-full p-2 relative">
-                        <ThreePitch />
+                        <ThreeHeatmap activeSuggestion={activeSuggestion} />
                     </div>
                 </TacticalCard>
 
                 <div className="space-y-6">
                     <TacticalCard title="Suggested Alterations" icon={<LocateFixed size={20} />}>
                         <ul className="space-y-4">
-                            {[
-                                { label: "Move Deep Square Leg wider", risk: "Low", conf: "94%" },
-                                { label: "Bring Long On inside circle", risk: "High", conf: "78%" },
-                                { label: "Deploy Fly Slip", risk: "Med", conf: "82%" },
-                            ].map((item, i) => (
-                                <li key={i} className="flex justify-between items-center p-3 rounded-lg bg-white/5 border border-white/5 hover:border-neonCyan hover:bg-neonCyan/5 transition-colors cursor-pointer group">
-                                    <span className="text-gray-300 group-hover:text-white">{item.label}</span>
+                            {suggestions.map((item) => (
+                                <li
+                                    key={item.id}
+                                    onClick={() => setActiveSuggestion(activeSuggestion === item.id ? null : item.id)}
+                                    className={`flex justify-between items-center p-3 rounded-lg border transition-colors cursor-pointer group ${activeSuggestion === item.id
+                                            ? "border-neonCyan bg-neonCyan/10"
+                                            : "bg-white/5 border-white/5 hover:border-neonCyan hover:bg-neonCyan/5"
+                                        }`}
+                                >
+                                    <span className={`transition-colors ${activeSuggestion === item.id ? "text-white" : "text-gray-300 group-hover:text-white"}`}>
+                                        {item.label}
+                                    </span>
                                     <div className="flex gap-3 text-xs">
-                                        <span className={`px-2 py-1 rounded bg-black/50 ${item.risk === 'High' ? 'text-red-400' : item.risk === 'Med' ? 'text-yellow-400' : 'text-neonGreen'}`}>{item.risk} Risk</span>
+                                        <span className={`px-2 py-1 rounded bg-black/50 ${item.risk === 'High' ? 'text-red-400' : item.risk === 'Med' ? 'text-yellow-400' : 'text-neonGreen'}`}>
+                                            {item.risk} Risk
+                                        </span>
                                         <span className="px-2 py-1 rounded bg-neonCyan/20 text-neonCyan">{item.conf} Conf</span>
                                     </div>
                                 </li>
