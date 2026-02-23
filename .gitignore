@@ -16,3 +16,7 @@ models/
 .venv
 env/
 venv/
+node_modules/
+.next/
+out/
+build/

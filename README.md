@@ -1,40 +1,52 @@
-# NeuroPitch 🏏
+# NeuroPitch: AI Tactical Brain
 
-NeuroPitch is a real-time cricket decision support system powered by machine learning and Monte Carlo simulations.
+![NeuroPitch UI](https://via.placeholder.com/1200x600/0a0a0a/06b6d4?text=NeuroPitch+Premium+UI)
+
+NeuroPitch is a next-generation predictive modeling analytics platform designed for cricket teams.
 
 ## Features
-- **Data Pipeline**: Automatically fetches and processes T20 match data from Cricsheet.
-- **Predictive Models**: Forecasts ball-by-ball outcomes using Random Forest/XGBoost.
-- **Simulation Engine**: "What-if" tactical simulator (10,000+ runs/query).
-- **Interactive Dashboard**: Streamlit UI for captains/coaches.
-- **Field Optimization**: Visual field placement suggestions.
+- **Live Match Coach Analyzer:** Automatic match discovery and live dynamic RAG simulation engine.
+- **Quantum Simulator:** Run millions of Monte Carlo simulations per minute.
+- **Vision Matrix:** Dynamic pitch heatmaps and spatial analysis.
+- **Video Analyzer:** Drone and side-camera footage processing for biomechanics.
 
-## Installation
+## API Key & Backend Configuration
+For the Live Coach feature, this app dynamically fetches real games using `cricapi.com`. 
+1. Get a key from `https://cricketdata.org/`
+2. Run backend with api key: `set CRICKET_API_KEY=YOUR_KEY`
+3. Launch backend from terminal root: `python main.py`
 
-1. Install Python 3.9+
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+## Tech Stack
+- Next.js 15+ (App Router), React 19, Tailwind CSS
+- React Three Fiber, Drei, Three.js (for 3D Vision Matrix)
+- FastAPI (Python), BeautifulSoup, Recharts & Plotly.js
 
-## Usage
+## Getting Started
 
-Run the main launcher:
+1. Install Frontend dependencies:
 ```bash
+npm install
+npm install three @types/three @react-three/fiber @react-three/drei
+```
+
+2. Run local frontend server:
+```bash
+npm run dev
+```
+
+3. Open a second terminal to install and explicitly start API backend:
+```bash
+pip install -r requirements.txt
 python main.py
 ```
-Or directly via Streamlit:
-```bash
-streamlit run src/app.py
-```
 
-## Note on First Run
-The first time you run the app, it will:
-1. Download ~400MB of JSON data from Cricsheet.
-2. Parse the data (this may take 1-2 minutes).
-3. Train the ML models.
+## Vercel Deployment
 
-Subsequent runs will load from cache and be much faster.
+Deploying completely free on Vercel:
 
-## License
-MIT
+1. Push your code to GitHub.
+2. Sign up / Login to Vercel (vercel.com).
+3. Click "Add New Project" and import your repository.
+4. Framework Preset will auto-detect "Next.js".
+5. Leave Build Command and Output Directory as default.
+6. Click "Deploy". The platform will be live globally within 60 seconds with SSL enabled.

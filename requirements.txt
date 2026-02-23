@@ -8,3 +8,8 @@ joblib
 matplotlib
 requests
 pytest
+fastapi
+uvicorn
+pydantic
+beautifulsoup4
+lxml
